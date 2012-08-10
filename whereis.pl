@@ -16,8 +16,10 @@ $VERSION = '1';
 
 Irssi::command_bind('whereis' => sub {
     my ($data, $server, $item) = @_;
+    $data =~ s/ //;
     $server->redirect_event('userhost', 1, $data , -1, 'redir failure', {
             '' => 'redir whereis' } );
+    print ("** WHEREIS $data **");
     $server->send_raw("USERHOST :$data");
 });
 
